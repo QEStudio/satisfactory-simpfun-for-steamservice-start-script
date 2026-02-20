@@ -1,0 +1,90 @@
+================================================================================
+                        Satisfactory Server Starter
+                          幸福工厂服务器启动器
+================================================================================
+
+[配置文件 start.ini 说明]
+
+  appId=1690800              # 应用ID (不要修改)
+  os=linux                   # 操作系统 (不要修改)
+
+  [端口配置]
+  port.enabled=false         # 游戏数据端口是否自定义
+  port.value=7777            # 游戏数据端口
+  query_port.enabled=false   # 查询端口是否自定义
+  query_port.value=15777     # 查询端口
+  beacon_port.enabled=false  # 可靠端口是否自定义
+  beacon_port.value=15000    # 可靠端口 (启动参数 -ReliablePort)
+
+  [服务器参数]
+  log.enabled=true           # 启用服务器日志
+  unattended.enabled=true    # 无人值守模式
+  nocrashdialog.enabled=true # 禁用崩溃对话框
+  multihome.enabled=false    # 绑定主机IP
+  multihome.value=           # 主机IP
+
+  [安装配置]
+  skip_install=false         # 跳过安装/更新
+  install_retry_forever=true # 无限重试安装
+  install_retry_interval=10s # 重试间隔
+
+  [Supervisor守护进程]
+  supervisor_enabled=true       # 启用Supervisor
+  supervisor_auto_config=true   # 自动配置 (从supervisord.conf读取)
+  supervisor_main_conf_path=    # supervisord.conf路径 (自动配置模式)
+  supervisor_socket=            # Unix套接字 (手动配置模式)
+  supervisor_program=           # 程序名称
+  supervisor_conf_path=         # 配置文件路径 (手动配置模式)
+  supervisor_user=              # 用户名 (手动配置模式)
+  supervisor_password=          # 密码 (手动配置模式)
+
+  [版本检测]
+  version_check_enabled=true    # 启用版本检测
+  version_check_url=            # 版本检测API地址
+  version_check_timeout=10s     # 检测超时时间
+  custom_id=277                 # 镜像ID
+  version_name=1.0.0            # 当前版本号
+
+  [其他配置]
+  banner_path=banner.txt     # Banner文件路径
+  banner_wait=10s            # Banner显示时间
+  start_user=container       # 运行用户
+  chown_install_dir=true     # 自动修改目录所有者
+  chmod_install_dir=true     # 自动修改目录权限
+
+================================================================================
+                              使用说明
+================================================================================
+
+  [端口配置] (必须配置至少2个端口)
+  1. port.enabled=true, port.value=<端口>     - 游戏数据端口 (必须)
+  2. beacon_port.enabled=true, beacon_port.value=<端口> - 可靠端口 (必须)
+  3. query_port.enabled=true, query_port.value=<端口>   - 查询端口 (建议)
+
+  [Supervisor配置模式]
+  自动配置 (supervisor_auto_config=true):
+    只需设置 supervisor_main_conf_path, 其他参数自动从 supervisord.conf 读取
+    - socket/user/password 从 [unix_http_server] 读取
+    - conf_path 从 [include] files 自动推断
+
+  手动配置 (supervisor_auto_config=false):
+    需要手动设置 socket/user/password/conf_path 等参数
+
+  [版本检测]
+  启动时会检测最新版本, 超时10s自动跳过
+  对比 start.ini 中的 version_name 与远程最新版本
+
+  [关闭服务器]
+  输入 "stop" 即可正常关闭服务器
+
+  [存档位置]
+  /home/container/.config/Epic/FactoryGame/Saved/SaveGames
+
+  [注意事项]
+  - 服务器网络可能无法连接Steam, 导致下载/更新卡住
+  - 如已有游戏副本, 可设置 skip_install=true 跳过
+  - 启用Supervisor后日志将输出到文件, 不显示在控制台
+
+================================================================================
+                           交流群: 949671297
+================================================================================
